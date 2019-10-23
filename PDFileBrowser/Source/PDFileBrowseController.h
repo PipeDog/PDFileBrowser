@@ -10,4 +10,6 @@
 
 @interface PDFileBrowseController : UIViewController
 
+@property (nonatomic, assign) BOOL filterHiddenFiles; // If YES, hidden files are not displayed, default NO.
+
 @end

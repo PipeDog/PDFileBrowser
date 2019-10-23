@@ -21,7 +21,7 @@
 }
 
 - (IBAction)didClickButton:(id)sender {
-    [[PDFileBrowser defaultBrowser] present];
+    [[PDFileBrowser defaultBrowser] presentFileBrowser:NO];
 }
 
 @end

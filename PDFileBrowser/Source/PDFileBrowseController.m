@@ -77,7 +77,8 @@ typedef NS_ENUM(NSUInteger, PDFileItemType) {
     NSArray<NSString *> *paths = [fileManager contentsOfDirectoryAtPath:path error:&error];
     
     for (NSString *tmpPath in paths) {
-        if ([[tmpPath lastPathComponent] hasPrefix:@"."]) { // Filter hidden files.
+        if (self.filterHiddenFiles &&
+            [[tmpPath lastPathComponent] hasPrefix:@"."]) { // Filter hidden files.
             continue;
         }
         

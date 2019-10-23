@@ -20,14 +20,13 @@
     return __defaultBrowser;
 }
 
-- (void)present {
-#ifdef DEBUG
+- (void)presentFileBrowser:(BOOL)filterHiddenFiles {
     PDFileBrowseController *browseController = [[PDFileBrowseController alloc] init];
+    browseController.filterHiddenFiles = filterHiddenFiles;
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:browseController];
     
     UIViewController *rootVC = [[UIApplication sharedApplication] keyWindow].rootViewController;
     [rootVC presentViewController:navigationController animated:YES completion:nil];
-#endif
 }
 
 @end

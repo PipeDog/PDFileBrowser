@@ -12,6 +12,7 @@
 
 @property (class, strong, readonly) PDFileBrowser *defaultBrowser;
 
-- (void)present;
+// @param filterHiddenFiles If YES, hidden files are not displayed.
+- (void)presentFileBrowser:(BOOL)filterHiddenFiles;
 
 @end
