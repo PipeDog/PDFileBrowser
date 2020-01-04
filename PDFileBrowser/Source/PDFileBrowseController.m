@@ -62,42 +62,12 @@ typedef NS_ENUM(NSUInteger, PDFileItemType) {
 }
 
 - (void)loadItemsForPath:(NSString *)path {
-    NSMutableArray<PDFileItem *> *items = [NSMutableArray array];
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    
-    if ([path isEqualToString:self.rootPath] || path.length == 0) {
-        path = self.rootPath;
-    } else {
-        PDFileItem *item = [[PDFileItem alloc] init];
-        item.name = @"🔙..";
-        item.type = PDFileItemTypeBack;
-        item.path = path;
-        [items addObject:item];
-    }
-    
-    NSError *error;
-    NSArray<NSString *> *paths = [fileManager contentsOfDirectoryAtPath:path error:&error];
-    
-    for (NSString *tmpPath in paths) {
-        if (self.filterHiddenFiles &&
-            [[tmpPath lastPathComponent] hasPrefix:@"."]) { // Filter hidden files.
-            continue;
-        }
-        
-        BOOL isDirectory = NO;
-        NSString *fullPath = [path stringByAppendingPathComponent:tmpPath];
-        [fileManager fileExistsAtPath:fullPath isDirectory:&isDirectory];
-        
-        PDFileItem *item = [[PDFileItem alloc] init];
-        item.path = fullPath;
-        item.type = isDirectory ? PDFileItemTypeDirectory : PDFileItemTypeFile;
-        item.name = [NSString stringWithFormat:@"%@ %@", (isDirectory ? @"📁" : @"📃"), tmpPath];
-        
-        [items addObject:item];
-    }
-    
-    self.items = [items copy];
-    [self.tableView reloadData];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        self.items = [self itemsAtPath:path];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.tableView reloadData];
+        });
+    });
 }
 
 #pragma mark - UITableView Delegate && DataSource Methods
@@ -145,11 +115,11 @@ typedef NS_ENUM(NSUInteger, PDFileItemType) {
         UIViewController<PDFilePreviewControllerDelegate> *controller = fileBrowser.filePreviewControllerBlock();
         [self.navigationController pushViewController:controller animated:YES];
         
-        NSURL *fileURL = [NSURL fileURLWithPath:item.path];
-        [controller loadFileURL:fileURL];
+        [controller loadFileAtPath:item.path];
     }
 }
 
+#pragma mark - Gesture Methods
 - (void)didReciveLongPressGesture:(UILongPressGestureRecognizer *)sender {
     UITableViewCell *cell = (UITableViewCell *)sender.view;
     NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
@@ -168,6 +138,45 @@ typedef NS_ENUM(NSUInteger, PDFileItemType) {
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         cell.detailTextLabel.text = @"";
     });
+}
+
+#pragma mark - Tool Methods
+- (NSArray<PDFileItem *> *)itemsAtPath:(NSString *)path {
+    NSMutableArray<PDFileItem *> *items = [NSMutableArray array];
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    
+    if ([path isEqualToString:self.rootPath] || path.length == 0) {
+        path = self.rootPath;
+    } else {
+        PDFileItem *item = [[PDFileItem alloc] init];
+        item.name = @"🔙..";
+        item.type = PDFileItemTypeBack;
+        item.path = path;
+        [items addObject:item];
+    }
+    
+    NSError *error;
+    NSArray<NSString *> *paths = [fileManager contentsOfDirectoryAtPath:path error:&error];
+    
+    for (NSString *tmpPath in paths) {
+        if (self.filterHiddenFiles &&
+            [[tmpPath lastPathComponent] hasPrefix:@"."]) { // Filter hidden files.
+            continue;
+        }
+        
+        BOOL isDirectory = NO;
+        NSString *fullPath = [path stringByAppendingPathComponent:tmpPath];
+        [fileManager fileExistsAtPath:fullPath isDirectory:&isDirectory];
+        
+        PDFileItem *item = [[PDFileItem alloc] init];
+        item.path = fullPath;
+        item.type = isDirectory ? PDFileItemTypeDirectory : PDFileItemTypeFile;
+        item.name = [NSString stringWithFormat:@"%@ %@", (isDirectory ? @"📁" : @"📃"), tmpPath];
+        
+        [items addObject:item];
+    }
+    
+    return [items copy];
 }
 
 #pragma mark - Getter Methods

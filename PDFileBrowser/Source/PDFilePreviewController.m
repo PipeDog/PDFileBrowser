@@ -31,18 +31,18 @@
 }
 
 #pragma mark - PDFilePreviewControllerDelegate Methods
-- (void)loadFileURL:(NSURL *)URL {
-    if (!URL.absoluteString.length) { return; }
+- (void)loadFileAtPath:(NSString *)filePath {
+    if (!filePath.length) { return; }
     
-    if ([URL.absoluteString hasPrefix:@"file://"]) {
-        NSURL *accessURL = [URL URLByDeletingLastPathComponent];
-        [self.webView loadFileURL:URL allowingReadAccessToURL:accessURL];
+    NSURL *fileURL = [NSURL fileURLWithPath:filePath];
+
+    if (@available(iOS 9, *)) {
+        NSURL *accessURL = [fileURL URLByDeletingLastPathComponent];
+        [self.webView loadFileURL:fileURL allowingReadAccessToURL:accessURL];
     } else {
-        NSURLRequest *request = [NSURLRequest requestWithURL:URL];
+        NSURLRequest *request = [NSURLRequest requestWithURL:fileURL];
         [self.webView loadRequest:request];
     }
-
-    self.title = URL.absoluteString;
 }
 
 #pragma mark - WKNavigationDelegate

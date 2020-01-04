@@ -11,7 +11,7 @@
 
 @protocol PDFilePreviewControllerDelegate <NSObject>
 
-- (void)loadFileURL:(NSURL *)fileURL;
+- (void)loadFileAtPath:(NSString *)filePath;
 
 @end
 
