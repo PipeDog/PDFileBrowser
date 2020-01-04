@@ -145,7 +145,7 @@ typedef NS_ENUM(NSUInteger, PDFileItemType) {
         UIViewController<PDFilePreviewControllerDelegate> *controller = fileBrowser.filePreviewControllerBlock();
         [self.navigationController pushViewController:controller animated:YES];
         
-        NSURL *fileURL = [NSURL URLWithString:item.path];
+        NSURL *fileURL = [NSURL fileURLWithPath:item.path];
         [controller loadFileURL:fileURL];
     }
 }
