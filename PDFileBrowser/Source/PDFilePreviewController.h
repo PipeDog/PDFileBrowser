@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "PDFileBrowser.h"
+
+@protocol PDFilePreviewControllerDelegate;
 
 NS_ASSUME_NONNULL_BEGIN
 

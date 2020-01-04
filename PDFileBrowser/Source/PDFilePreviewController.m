@@ -8,6 +8,7 @@
 
 #import "PDFilePreviewController.h"
 #import <WebKit/WebKit.h>
+#import "PDFileBrowser.h"
 
 @interface PDFilePreviewController ()
 
@@ -27,7 +28,7 @@
     [self.view addSubview:self.webView];
 }
 
-#pragma mark - Public Methods
+#pragma mark - PDFilePreviewControllerDelegate Methods
 - (void)loadFileURL:(NSURL *)URL {
     if (!URL.absoluteString.length) { return; }
     

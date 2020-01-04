@@ -7,10 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 @protocol PDFilePreviewControllerDelegate <NSObject>
 
-- (void)loadFileURL:(NSURL *)URL;
+- (void)loadFileURL:(NSURL *)fileURL;
 
 @end
 
@@ -21,7 +22,6 @@
 // @param filterHiddenFiles If YES, hidden files are not displayed.
 - (void)presentFileBrowser:(BOOL)filterHiddenFiles;
 
-- (void)setFilePreviewControllerClass:(Class)aClass;
-- (Class)filePreviewViewControllerClass;
+- (void)setFilePreviewController:(UIViewController<PDFilePreviewControllerDelegate> * (^)(void))block;
 
 @end

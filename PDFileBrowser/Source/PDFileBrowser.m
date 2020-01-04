@@ -7,14 +7,9 @@
 //
 
 #import "PDFileBrowser.h"
+#import "PDFileBrowser+Internal.h"
 #import "PDFileBrowseController.h"
 #import "PDFilePreviewController.h"
-
-@interface PDFileBrowser ()
-
-@property (nonatomic, strong) Class filePreviewControllerClass;
-
-@end
 
 @implementation PDFileBrowser
 
@@ -30,7 +25,9 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
-        _filePreviewControllerClass = [PDFilePreviewController class];
+        _filePreviewControllerBlock = ^ {
+            return [[PDFilePreviewController alloc] init];
+        };
     }
     return self;
 }
@@ -44,15 +41,10 @@
     [rootVC presentViewController:navigationController animated:YES completion:nil];
 }
 
-- (void)setFilePreviewControllerClass:(Class)aClass {
-    if (![aClass instancesRespondToSelector:@selector(loadFileURL:)]) {
-        return;
+- (void)setFilePreviewController:(UIViewController<PDFilePreviewControllerDelegate> *(^)(void))block {
+    if (block) {
+        _filePreviewControllerBlock = block;
     }
-    self.filePreviewControllerClass = aClass;
-}
-
-- (Class)filePreviewViewControllerClass {
-    return _filePreviewControllerClass;
 }
 
 @end
