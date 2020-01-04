@@ -37,7 +37,7 @@
     browseController.filterHiddenFiles = filterHiddenFiles;
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:browseController];
     
-    UIViewController *rootVC = [[UIApplication sharedApplication] keyWindow].rootViewController;
+    UIViewController *rootVC = [self effectiveWindow].rootViewController;
     [rootVC presentViewController:navigationController animated:YES completion:nil];
 }
 
@@ -45,6 +45,23 @@
     if (block) {
         _filePreviewControllerBlock = block;
     }
+}
+
+#pragma mark - Private Methods
+- (UIWindow *)effectiveWindow {
+    UIWindow *window = nil;
+    
+    if (@available(iOS 13.0, *)) {
+        for (UIWindowScene *windowScene in [UIApplication sharedApplication].connectedScenes) {
+            if (windowScene.activationState == UISceneActivationStateForegroundActive) {
+                window = windowScene.windows.firstObject;
+                break;
+            }
+        }
+    } else {
+        window = [UIApplication sharedApplication].keyWindow;
+    }
+    return window;
 }
 
 @end
