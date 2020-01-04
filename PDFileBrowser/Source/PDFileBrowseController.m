@@ -35,6 +35,7 @@ typedef NS_ENUM(NSUInteger, PDFileItemType) {
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, copy) NSArray<PDFileItem *> *items;
 @property (nonatomic, copy) NSString *rootPath;
+@property (nonatomic, strong) UIActivityIndicatorView *activityIndicatorView;
 
 @end
 
@@ -49,6 +50,7 @@ typedef NS_ENUM(NSUInteger, PDFileItemType) {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor whiteColor];
+    [self createViewHierarchy];
     
     self.navigationController.navigationBar.tintColor = [UIColor blackColor];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(didClickBackButtomItem:)];
@@ -57,15 +59,23 @@ typedef NS_ENUM(NSUInteger, PDFileItemType) {
     [self loadItemsForPath:self.rootPath];
 }
 
+- (void)createViewHierarchy {
+    [self.view addSubview:self.tableView];
+    [self.view addSubview:self.activityIndicatorView];
+}
+
 - (void)didClickBackButtomItem:(UIBarButtonItem *)sender {
     [self.navigationController dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)loadItemsForPath:(NSString *)path {
+    [self.activityIndicatorView startAnimating];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         self.items = [self itemsAtPath:path];
+        
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.tableView reloadData];
+            [self.activityIndicatorView stopAnimating];
         });
     });
 }
@@ -186,9 +196,22 @@ typedef NS_ENUM(NSUInteger, PDFileItemType) {
         _tableView.dataSource = self;
         _tableView.delegate = self;
         _tableView.tableFooterView = [[UIView alloc] init];
-        [self.view addSubview:_tableView];
     }
     return _tableView;
+}
+
+- (UIActivityIndicatorView *)activityIndicatorView {
+    if (!_activityIndicatorView) {
+        _activityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+        
+        CGSize size = CGSizeMake(100.f, 100.f);
+        CGRect rect = CGRectMake((CGRectGetWidth(self.view.bounds) - size.width) / 2.f,
+                                 (CGRectGetHeight(self.view.bounds) - size.height) / 2.f,
+                                 size.width,
+                                 size.height);
+        _activityIndicatorView.frame = rect;
+    }
+    return _activityIndicatorView;
 }
 
 @end

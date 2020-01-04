@@ -47,13 +47,11 @@
 
 #pragma mark - WKNavigationDelegate
 - (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(WKNavigation *)navigation {
-    self.activityIndicatorView.hidden = NO;
     [self.activityIndicatorView startAnimating];
 }
 
 - (void)webView:(WKWebView *)webView didFailNavigation:(WKNavigation *)navigation withError:(NSError *)error {
     [self.activityIndicatorView stopAnimating];
-    self.activityIndicatorView.hidden = YES;
     
     // Handle error...
     NSLog(@"error: %@", error);
@@ -63,7 +61,6 @@
 
 - (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation {
     [self.activityIndicatorView stopAnimating];
-    self.activityIndicatorView.hidden = YES;
 }
 
 #pragma mark - Getter Methods
@@ -82,7 +79,6 @@
 - (UIActivityIndicatorView *)activityIndicatorView {
     if (!_activityIndicatorView) {
         _activityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-        _activityIndicatorView.hidden = YES;
         
         CGSize size = CGSizeMake(100.f, 100.f);
         CGRect rect = CGRectMake((CGRectGetWidth(self.view.bounds) - size.width) / 2.f,
