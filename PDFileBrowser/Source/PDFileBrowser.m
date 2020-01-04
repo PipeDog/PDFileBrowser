@@ -8,6 +8,13 @@
 
 #import "PDFileBrowser.h"
 #import "PDFileBrowseController.h"
+#import "PDFilePreviewController.h"
+
+@interface PDFileBrowser ()
+
+@property (nonatomic, strong) Class filePreviewControllerClass;
+
+@end
 
 @implementation PDFileBrowser
 
@@ -20,6 +27,14 @@
     return __defaultBrowser;
 }
 
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        _filePreviewControllerClass = [PDFilePreviewController class];
+    }
+    return self;
+}
+
 - (void)presentFileBrowser:(BOOL)filterHiddenFiles {
     PDFileBrowseController *browseController = [[PDFileBrowseController alloc] init];
     browseController.filterHiddenFiles = filterHiddenFiles;
@@ -27,6 +42,17 @@
     
     UIViewController *rootVC = [[UIApplication sharedApplication] keyWindow].rootViewController;
     [rootVC presentViewController:navigationController animated:YES completion:nil];
+}
+
+- (void)setFilePreviewControllerClass:(Class)aClass {
+    if (![aClass instancesRespondToSelector:@selector(loadFileURL:)]) {
+        return;
+    }
+    self.filePreviewControllerClass = aClass;
+}
+
+- (Class)filePreviewViewControllerClass {
+    return _filePreviewControllerClass;
 }
 
 @end

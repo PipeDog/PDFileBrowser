@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DD0C4C2423C09D31004C0090 /* PDFilePreviewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DD0C4C2323C09D31004C0090 /* PDFilePreviewController.m */; };
 		EC736771206CC4C40010C858 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EC736770206CC4C40010C858 /* AppDelegate.m */; };
 		EC736774206CC4C40010C858 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC736773206CC4C40010C858 /* ViewController.m */; };
 		EC736777206CC4C40010C858 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC736775206CC4C40010C858 /* Main.storyboard */; };
@@ -37,6 +38,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		DD0C4C2223C09D31004C0090 /* PDFilePreviewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PDFilePreviewController.h; sourceTree = "<group>"; };
+		DD0C4C2323C09D31004C0090 /* PDFilePreviewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PDFilePreviewController.m; sourceTree = "<group>"; };
 		EC73676C206CC4C40010C858 /* PDFileBrowser.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PDFileBrowser.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EC73676F206CC4C40010C858 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		EC736770206CC4C40010C858 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -142,10 +145,12 @@
 		EC7367A1206CC4CE0010C858 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				EC7367A2206CC4EB0010C858 /* PDFileBrowseController.h */,
-				EC7367A4206CC4EB0010C858 /* PDFileBrowseController.m */,
 				EC7367A5206CC4EB0010C858 /* PDFileBrowser.h */,
 				EC7367A3206CC4EB0010C858 /* PDFileBrowser.m */,
+				EC7367A2206CC4EB0010C858 /* PDFileBrowseController.h */,
+				EC7367A4206CC4EB0010C858 /* PDFileBrowseController.m */,
+				DD0C4C2223C09D31004C0090 /* PDFilePreviewController.h */,
+				DD0C4C2323C09D31004C0090 /* PDFilePreviewController.m */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -284,6 +289,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EC736774206CC4C40010C858 /* ViewController.m in Sources */,
+				DD0C4C2423C09D31004C0090 /* PDFilePreviewController.m in Sources */,
 				EC7367A7206CC4EB0010C858 /* PDFileBrowseController.m in Sources */,
 				EC73677F206CC4C40010C858 /* main.m in Sources */,
 				EC7367A6206CC4EB0010C858 /* PDFileBrowser.m in Sources */,

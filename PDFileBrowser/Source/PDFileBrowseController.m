@@ -7,6 +7,7 @@
 //
 
 #import "PDFileBrowseController.h"
+#import "PDFileBrowser.h"
 
 static NSString *const kSandboxCellId = @"kSandboxCellId";
 
@@ -137,6 +138,14 @@ typedef NS_ENUM(NSUInteger, PDFileItemType) {
     }
     else if (item.type == PDFileItemTypeDirectory) {
         [self loadItemsForPath:item.path];
+    }
+    else if (item.type == PDFileItemTypeFile) {
+        Class aClass = [[PDFileBrowser defaultBrowser] filePreviewViewControllerClass];
+        id<PDFilePreviewControllerDelegate> controller = (id<PDFilePreviewControllerDelegate>)[[aClass alloc] init];
+        [self.navigationController pushViewController:(UIViewController *)controller animated:YES];
+        
+        NSURL *fileURL = [NSURL URLWithString:item.path];
+        [controller loadFileURL:fileURL];;
     }
 }
 
