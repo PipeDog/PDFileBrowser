@@ -34,6 +34,7 @@
 - (void)loadFileAtPath:(NSString *)filePath {
     if (!filePath.length) { return; }
     
+    self.title = [filePath lastPathComponent];
     NSURL *fileURL = [NSURL fileURLWithPath:filePath];
 
     if (@available(iOS 9, *)) {

@@ -1,5 +1,5 @@
 //
-//  PDLogPreviewController.h
+//  PDTextPreviewController.h
 //  PDLogger
 //
 //  Created by liang on 2020/1/4.
@@ -11,7 +11,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface PDLogPreviewController : UIViewController <PDFilePreviewControllerDelegate>
+@interface PDTextPreviewController : UIViewController <PDFilePreviewControllerDelegate>
 
 @end
 

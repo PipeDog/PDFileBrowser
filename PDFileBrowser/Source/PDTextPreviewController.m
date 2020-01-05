@@ -1,21 +1,21 @@
 //
-//  PDLogPreviewController.m
+//  PDTextPreviewController.m
 //  PDLogger
 //
 //  Created by liang on 2020/1/4.
 //  Copyright © 2020 liang. All rights reserved.
 //
 
-#import "PDLogPreviewController.h"
+#import "PDTextPreviewController.h"
 
-@interface PDLogPreviewController ()
+@interface PDTextPreviewController ()
 
 @property (nonatomic, strong) UITextView *textView;
 @property (nonatomic, strong) UIActivityIndicatorView *activityIndicatorView;
 
 @end
 
-@implementation PDLogPreviewController
+@implementation PDTextPreviewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -33,7 +33,6 @@
     if (!filePath.length) { return; }
     
     self.title = [filePath lastPathComponent];
-    
     [self.activityIndicatorView startAnimating];
 
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{

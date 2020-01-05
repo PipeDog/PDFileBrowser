@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		DD0C4C2423C09D31004C0090 /* PDFilePreviewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DD0C4C2323C09D31004C0090 /* PDFilePreviewController.m */; };
-		DD0C4C3523C0CCD1004C0090 /* PDLogPreviewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DD0C4C3423C0CCD1004C0090 /* PDLogPreviewController.m */; };
+		DD0C4C3523C0CCD1004C0090 /* PDTextPreviewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DD0C4C3423C0CCD1004C0090 /* PDTextPreviewController.m */; };
 		EC736771206CC4C40010C858 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EC736770206CC4C40010C858 /* AppDelegate.m */; };
 		EC736774206CC4C40010C858 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC736773206CC4C40010C858 /* ViewController.m */; };
 		EC736777206CC4C40010C858 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC736775206CC4C40010C858 /* Main.storyboard */; };
@@ -42,8 +42,8 @@
 		DD0C4C2223C09D31004C0090 /* PDFilePreviewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PDFilePreviewController.h; sourceTree = "<group>"; };
 		DD0C4C2323C09D31004C0090 /* PDFilePreviewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PDFilePreviewController.m; sourceTree = "<group>"; };
 		DD0C4C2523C0A8B0004C0090 /* PDFileBrowser+Internal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PDFileBrowser+Internal.h"; sourceTree = "<group>"; };
-		DD0C4C3323C0CCD1004C0090 /* PDLogPreviewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDLogPreviewController.h; sourceTree = "<group>"; };
-		DD0C4C3423C0CCD1004C0090 /* PDLogPreviewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDLogPreviewController.m; sourceTree = "<group>"; };
+		DD0C4C3323C0CCD1004C0090 /* PDTextPreviewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDTextPreviewController.h; sourceTree = "<group>"; };
+		DD0C4C3423C0CCD1004C0090 /* PDTextPreviewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDTextPreviewController.m; sourceTree = "<group>"; };
 		EC73676C206CC4C40010C858 /* PDFileBrowser.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PDFileBrowser.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EC73676F206CC4C40010C858 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		EC736770206CC4C40010C858 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -156,8 +156,8 @@
 				EC7367A4206CC4EB0010C858 /* PDFileBrowseController.m */,
 				DD0C4C2223C09D31004C0090 /* PDFilePreviewController.h */,
 				DD0C4C2323C09D31004C0090 /* PDFilePreviewController.m */,
-				DD0C4C3323C0CCD1004C0090 /* PDLogPreviewController.h */,
-				DD0C4C3423C0CCD1004C0090 /* PDLogPreviewController.m */,
+				DD0C4C3323C0CCD1004C0090 /* PDTextPreviewController.h */,
+				DD0C4C3423C0CCD1004C0090 /* PDTextPreviewController.m */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -295,7 +295,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DD0C4C3523C0CCD1004C0090 /* PDLogPreviewController.m in Sources */,
+				DD0C4C3523C0CCD1004C0090 /* PDTextPreviewController.m in Sources */,
 				EC736774206CC4C40010C858 /* ViewController.m in Sources */,
 				DD0C4C2423C09D31004C0090 /* PDFilePreviewController.m in Sources */,
 				EC7367A7206CC4EB0010C858 /* PDFileBrowseController.m in Sources */,

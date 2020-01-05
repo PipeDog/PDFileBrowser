@@ -70,6 +70,7 @@ typedef NS_ENUM(NSUInteger, PDFileItemType) {
 
 - (void)loadItemsForPath:(NSString *)path {
     [self.activityIndicatorView startAnimating];
+    
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         self.items = [self itemsAtPath:path];
         
