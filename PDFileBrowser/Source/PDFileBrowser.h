@@ -22,6 +22,6 @@
 // @param filterHiddenFiles If YES, hidden files are not displayed.
 - (void)presentFileBrowser:(BOOL)filterHiddenFiles;
 
-- (void)setFilePreviewController:(UIViewController<PDFilePreviewControllerDelegate> * (^)(void))block;
+- (void)setFilePreviewController:(UIViewController<PDFilePreviewControllerDelegate> * (^)(NSString *filePath))block;
 
 @end

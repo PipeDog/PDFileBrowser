@@ -25,7 +25,7 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
-        _filePreviewControllerBlock = ^ {
+        _filePreviewControllerBlock = ^(NSString *filePath) {
             return [[PDFilePreviewController alloc] init];
         };
     }
@@ -41,7 +41,7 @@
     [rootVC presentViewController:navigationController animated:YES completion:nil];
 }
 
-- (void)setFilePreviewController:(UIViewController<PDFilePreviewControllerDelegate> *(^)(void))block {
+- (void)setFilePreviewController:(UIViewController<PDFilePreviewControllerDelegate> *(^)(NSString *))block {
     if (block) {
         _filePreviewControllerBlock = block;
     }

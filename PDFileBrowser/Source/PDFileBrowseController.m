@@ -123,7 +123,7 @@ typedef NS_ENUM(NSUInteger, PDFileItemType) {
     }
     else if (item.type == PDFileItemTypeFile) {
         PDFileBrowser *fileBrowser = [PDFileBrowser defaultBrowser];
-        UIViewController<PDFilePreviewControllerDelegate> *controller = fileBrowser.filePreviewControllerBlock();
+        UIViewController<PDFilePreviewControllerDelegate> *controller = fileBrowser.filePreviewControllerBlock(item.path);
         [self.navigationController pushViewController:controller animated:YES];
         
         [controller loadFileAtPath:item.path];

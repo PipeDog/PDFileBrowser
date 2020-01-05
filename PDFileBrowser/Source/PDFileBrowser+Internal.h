@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface PDFileBrowser ()
 
-@property (nonatomic, copy) UIViewController<PDFilePreviewControllerDelegate> * (^filePreviewControllerBlock)(void);
+@property (nonatomic, copy) UIViewController<PDFilePreviewControllerDelegate> * (^filePreviewControllerBlock)(NSString *filePath);
 
 @end
 

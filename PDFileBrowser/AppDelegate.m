@@ -7,6 +7,9 @@
 //
 
 #import "AppDelegate.h"
+#import "PDFileBrowser.h"
+#import "PDFilePreviewController.h"
+#import "PDTextPreviewController.h"
 
 @interface AppDelegate ()
 
@@ -17,6 +20,16 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    [[PDFileBrowser defaultBrowser] setFilePreviewController:^UIViewController<PDFilePreviewControllerDelegate> *(NSString *filePath) {
+        if ([filePath.pathExtension isEqualToString:@"log"] ||
+            [filePath.pathExtension isEqualToString:@"text"] ||
+            [filePath.pathExtension isEqualToString:@"txt"]) {
+            return [[PDTextPreviewController alloc] init];
+        }
+        return [[PDFilePreviewController alloc] init];
+    }];
+    
     return YES;
 }
 
